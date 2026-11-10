@@ -11,6 +11,15 @@
     ],
   },
   "files": [
+    { "kind": "group", "path": "View model" },
+    {
+      "kind": "group",
+      "path": "View",
+      "children": [
+        { "path": "Startpage.swift", "target-membership": [ "MyApp/compile-sources" ] },
+      ],
+    },
+    { "kind": "group", "path": "Model" },
     { "kind": "folder", "path": "MyApp", "target-membership": [ "MyApp" ] },
     {
       "kind": "group",
