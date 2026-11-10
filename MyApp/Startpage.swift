@@ -1,92 +1,89 @@
-
-
 import SwiftUI
 
 struct Startpage: View {
     var body: some View {
         
+        //عشان يحط العناصر فوق بعض
         ZStack{
-            Color.black
+            Color(.systemBackground)
                 .ignoresSafeArea()
             
             
-            
+            //يلصق العناصر باليسار، وهذا اللي يخلي “My    المسافة صفر عشان اتحكم فيها انا-Plants” في الزاوية
             VStack (alignment: .leading, spacing: 0){
                 
                 
                 // الهيدر
-                HStack{
-                    Text("My Plants🌱")
-                        .font(.system(.largeTitle, design: .default))
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                }
-                .padding(.horizontal,20)
-                .padding(.top,10)
+                
+                Text("My Plants🌱")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                    .padding(.leading,14)
+                    .padding(.top,16)
+                
                 
                 // الخط الفاصل
                 Divider()
-                    .background(Color.gray)
-                    .padding(.horizontal,20)
-                    .padding(.top,12)
+                    .background(Color.primary)
+                    .padding(.leading,14)
+                    .padding(.top,16)
                 
                 
-                VStack(alignment: .center, spacing: 0) {
+                VStack(spacing: 0) {
                     // الصورة
-                    Spacer()
+                    
                     Image("Myplant")
                         .resizable()
                         .scaledToFit()
-                        .frame(width:180,height: 180)
-                        .frame(maxWidth: .infinity)
+                        .frame(width:200,height: 200)
+                        .padding(.top,70)
+                    //padding المسافة بين الخط والصورة
                     
                     
+                    // النصوص تحت الصورة
+                    Text("Start your plant journey!")
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(.primary)
+                        .padding(.top,20)
                     
-                    VStack (spacing: 25){
-                        // النصوص تحت الصورة
-                        
-                        Text("Start your plant journey!")
-                            .font(.system(.title2, design: .default))
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        
-                        
-                        Text("Now all your plants will be in one place and\nwe will help you take care of them :) 🪴")
-                            .font(.system(.body, design: .default))
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal,30)
-                        
-                        // مسافة ترفع لي الكلام
-                        Spacer()
-                        
-                    }
-                    .padding(.top, 37)
+                    Text("Now all your plants will be in one place and\nwe will help you take care of them :) 🪴")
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.top,20)
+                        .padding(.horizontal,30)
                     
                 }
                 .frame(maxWidth: .infinity)
+                // مسافة ترفع لي الكلام
+                Spacer()
                 
+                
+                // الزر
+                Button{
+                    // اجراء الزر
+                } label: {
+           
+                    Text("Set Plant Reminder")
+                        .font(.system(size: 17, weight: .medium))                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 38)
+                        .background(Color(red: 0.25, green: 0.45, blue: 0.37))
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.white.opacity(0.35), lineWidth: 1)
+                        )
+                }
+                .padding(.horizontal, 67)
+                .padding(.top, 95)
                 
                 Spacer()
-                Button(action: { // 7️⃣ [فتحنا الـ closure أو القوس الخاص بعملية النقر على الزر]
-                    // إجراء الزر مستقبلاً
-                }) { // 8️⃣ [فتحنا القوس اللي بيشيل شكل وتصميم محتوى الزر من داخل]
-                    
-                    Text("Set Plant Reminder")
-                        .font(.system(.headline, design: .default))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(red: 0.20, green: 0.50, blue: 0.41))
-                        .cornerRadius(25)
-                    
-                } // 8️⃣ [قفلنا تصميم محتوى الزر هنا]
-                .padding(.horizontal, 24)
-                .padding(.bottom, 30)
             }
                     
                 }
+        .preferredColorScheme(.dark)
             }
         }
     
