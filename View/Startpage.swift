@@ -69,9 +69,14 @@ struct Startpage: View {
                         .font(.system(size: 17, weight: .medium))                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 38)
+                        .glassEffect(
+                            .regular
+                                .tint(Color(red: 0.25, green: 0.45, blue: 0.37))
+                                .interactive(),
+                            in: .capsule
+                        )
                 }
-                .buttonStyle(.glassProminent)
-                .tint(Color(red: 0.25, green: 0.45, blue: 0.37))
+                .buttonStyle(.plain)
                 .padding(.horizontal, 67)
                 .padding(.top, 95)
                 
