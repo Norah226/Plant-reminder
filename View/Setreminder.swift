@@ -8,11 +8,41 @@
 import SwiftUI
 
 struct Setreminder: View {
+    // نستخدم bindable عشان نخلي المستخدم يقدر يكتب في الحقول
+    @Bindable var viewModel: PlantsViewModel
+    
     var body: some View {
-        Text("Set reminder")
+        NavigationStack {
+            // عنوان الصفحة
+            Text("Set reminder")
+                .navigationTitle("Set Reminder")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    
+                    // مكان زر الاكس
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button{
+                            // وش يصير لما نضغطه؟ نستدعي الدالة
+                            viewModel.cancel()
+                            // شكل الزر
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                    }
+                    // زر الصح
+                    ToolbarItem(placement: .topBarTrailing){
+                        Button{
+                            viewModel.savePlant()
+                        } label: {
+                            Image(systemName: "checkmark")
+                        }
+                        
+                        
+                    }
+                }
+        }
     }
 }
-
 #Preview {
-    Setreminder()
+    Setreminder(viewModel: PlantsViewModel())
 }
