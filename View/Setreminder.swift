@@ -13,7 +13,7 @@ struct Setreminder: View {
     
     var body: some View {
         NavigationStack {
-            // عنوان النبتة جبنا فورم جاهز وكتبنا فيه 
+            // عنوان النبتة جبنا فورم جاهز وكتبنا فيه
             Form{
                 Section{
                     HStack{
@@ -30,34 +30,52 @@ struct Setreminder: View {
                     } label: {
                         Label("Room", systemImage: "location")
                     }
+                    Picker(selection:$viewModel.light){
+                        ForEach(Light.allCases, id:\.self) {light in
+                            Text(light.rawValue).tag(light)
+                        }
+                    } label: {
+                        Label("Light", systemImage: "sun.max")
+                    }
                 }
-                
-                .navigationTitle("Set Reminder")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar{
+                Section{
                     
-                    // مكان زر الاكس
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button{
-                            // وش يصير لما نضغطه؟ نستدعي الدالة
-                            viewModel.cancel()
-                            // شكل الزر
-                        } label: {
-                            Image(systemName: "xmark")
+                    Picker(selection:$viewModel.wateringDays){
+                        ForEach(WateringDays.allCases, id: \.self) {wateringDays in
+                            Text(wateringDays.rawValue).tag(wateringDays)
                         }
                     }
-                    // زر الصح
-                    ToolbarItem(placement: .topBarTrailing){
-                        Button{
-                            viewModel.savePlant()
-                        } label: {
-                            Image(systemName: "checkmark")
-                        }
-                        
-                        
+                    label: {
+                        Label("Wateringdays", systemImage: "drop")
                     }
                 }
             }
+            
+            .navigationTitle("Set Reminder")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                
+                // مكان زر الاكس
+                ToolbarItem(placement: .topBarLeading) {
+                    Button{
+                        // وش يصير لما نضغطه؟ نستدعي الدالة
+                        viewModel.cancel()
+                        // شكل الزر
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+                // زر الصح
+                ToolbarItem(placement: .topBarTrailing){
+                    Button{
+                        viewModel.savePlant()
+                    } label: {
+                        Image(systemName: "checkmark")
+                    }
+                    
+                }
+            }
+            
         }
     }
 }
