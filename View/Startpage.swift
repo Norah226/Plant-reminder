@@ -3,7 +3,7 @@ import SwiftUI
 struct Startpage: View {
     var body: some View {
         
-        //عشان يحط العناصر فوق بعض
+        //عشان يحط العناصر فوق بعض كطبقات
         ZStack{
             Color(.systemBackground)
                 .ignoresSafeArea()

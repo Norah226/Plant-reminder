@@ -11,8 +11,13 @@
     ],
   },
   "files": [
-    { "kind": "group", "path": "View model" },
     {
+      "kind": "group",
+      "path": "View model",
+      "children": [
+        { "path": "plantsviewmodel.swift", "target-membership": [ "MyApp/compile-sources" ] },
+      ],
+    }, {
       "kind": "group",
       "path": "View",
       "children": [
@@ -24,6 +29,7 @@
       "path": "Model",
       "children": [
         { "path": "plantoptions.swift", "target-membership": [ "MyApp/compile-sources" ] },
+        { "path": "plantinfo.swift", "target-membership": [ "MyApp/compile-sources" ] },
       ],
     },
     { "kind": "folder", "path": "MyApp", "target-membership": [ "MyApp" ] },
