@@ -48,6 +48,16 @@ struct Setreminder: View {
                     label: {
                         Label("Wateringdays", systemImage: "drop")
                     }
+                    Picker(selection:$viewModel.water){
+                        ForEach(Water.allCases, id: \.self) {water in
+                            Text(water.rawValue).tag(water)
+                        }
+                    }
+                    label: {
+                        Label("Water", systemImage: "drop")
+                        
+                    }
+                    
                 }
             }
             
