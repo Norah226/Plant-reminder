@@ -13,8 +13,25 @@ struct Setreminder: View {
     
     var body: some View {
         NavigationStack {
-            // عنوان الصفحة
-            Text("Set reminder")
+            // عنوان النبتة جبنا فورم جاهز وكتبنا فيه 
+            Form{
+                Section{
+                    HStack{
+                        Text("Plant Name")
+                        TextField("Pothos", text: $viewModel.plantName)
+                    }
+                }
+                Section{
+                    //القائمة المنسدلة اسميهاوتحفظ الخيار في القائمة نفسها  picker
+                    Picker(selection:$viewModel.room){
+                        ForEach(Room.allCases, id:  \.self) {room in
+                            Text(room.rawValue).tag(room)
+                        }
+                    } label: {
+                        Label("Room", systemImage: "location")
+                    }
+                }
+                
                 .navigationTitle("Set Reminder")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar{
@@ -40,6 +57,7 @@ struct Setreminder: View {
                         
                     }
                 }
+            }
         }
     }
 }
