@@ -64,29 +64,24 @@ struct Startpage: View {
                 Button{
                     // اجراء الزر
                 } label: {
-           
+                    
                     Text("Set Plant Reminder")
                         .font(.system(size: 17, weight: .medium))                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 38)
-                        .background(Color(red: 0.25, green: 0.45, blue: 0.37))
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(Color.white.opacity(0.35), lineWidth: 1)
-                        )
                 }
+                .buttonStyle(.glassProminent)
+                .tint(Color(red: 0.25, green: 0.45, blue: 0.37))
                 .padding(.horizontal, 67)
                 .padding(.top, 95)
                 
                 Spacer()
             }
-                    
-                }
-        .preferredColorScheme(.dark)
-            }
+            
         }
-    
+        .preferredColorScheme(.dark)
+    }
+}
 
 
 
@@ -104,7 +99,8 @@ struct Startpage: View {
 
 
 
- #Preview {
+
+#Preview {
     Startpage()
 }
 //
