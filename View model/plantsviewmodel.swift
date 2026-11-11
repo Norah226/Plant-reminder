@@ -15,26 +15,40 @@ class PlantsViewModel{
     var hasStarted: Bool = false
     // ما تكتبه المستخدمة في الورقة
     // room تمثل اسم الخانة Room الenumا واخر شي الbedroom القيمة داخل الصندوق
+    // حطينا سترنق وخليناه فاضي لان المستخدم مابعد كتب شي
     var plantName: String = ""
     var room: Room = .bedroom
     var wateringDays: WateringDays = .everyday
     var light: Light = .fullSun
     var water: Water = .ml20to50
     
+    
+    //تقفل الورقة وتمسح الحقول
     func cancel () {
         showSetReminder = false
+        resetForm()
     }
+    //تبدأ وتفتح الورقة
     func start () {
         hasStarted = true
         showSetReminder = true
     }
-    
-// مهمة حفظ النبتة اللي يحددها المستخدم
+    //تصنع نبتة وتضيفها وتقفل
+    // مهمة حفظ النبتة اللي يحددها المستخدم
     func savePlant (){
         let newPlant = Plant (name: plantName, room: room, wateringDays: wateringDays, light: light, water: water)
         // هنا كأني اقول للصندوق اضف النبتة اللي اضافها المستخدم لنفسه
         plants.append(newPlant)
         cancel()
         
+    }
+    //ترجّع الحقول لأصلها
+    // هذي الدالة ترجع القيمة فاضية كل ما جا المستخدم يحط reinder جديد
+    func resetForm () {
+        plantName = ""
+        room = .bedroom
+        wateringDays = .everyday
+        light = .fullSun
+        water = .ml20to50
     }
 }
