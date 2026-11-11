@@ -80,11 +80,12 @@ struct Setreminder: View {
                     } label: {
                         Image(systemName: "checkmark")
                     }
-                    
+                  
                 }
             }
             
         }
+        .preferredColorScheme(.dark)
     }
 }
 #Preview {
