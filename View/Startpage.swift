@@ -32,9 +32,12 @@ struct Startpage: View {
                 
                 // هنا شرط وكتبته في هذي الصفحة عشانها هي اللي تنعرض للمستخدم اول مره
                 if viewModel .hasStarted{
+                    // مساحة من فوق
                     Spacer()
                     Noreminders()
+                    // يخلي النص يصير بالنص اللي في الصفحة الثانية عشان مايتحكم فيه الvstackالكبير 
                         .frame(maxWidth:.infinity)
+                    // مساحة من تحت
                     Spacer()
                 }else {
                     
