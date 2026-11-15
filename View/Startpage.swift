@@ -31,7 +31,7 @@ struct Startpage: View {
                     .padding(.top,16)
                 
                 // هنا شرط وكتبته في هذي الصفحة عشانها هي اللي تنعرض للمستخدم اول مره
-                if viewModel .hasStarted{
+                if viewModel.hasStarted{
                     // مساحة من فوق
                     Spacer()
                     Noreminders()
@@ -102,6 +102,30 @@ struct Startpage: View {
             .sheet(isPresented: $viewModel.showSetReminder){
                 Setreminder (viewModel:viewModel)
             }
+            //زر البلس حطيت overlay عشان تحط الزر فوق الصفحة كطبقة ومكانه تحت يمين
+            .overlay(alignment: .bottomTrailing){
+                // هنا حطيت شرط ماينعرض الا اذا بدا اليوزر
+                if viewModel.hasStarted{
+                    Button{
+                        viewModel.start()
+                    }label: {
+                        Image(systemName: "plus")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .frame(width:50, height: 50)
+                            .glassEffect(
+                                .regular
+                                    .tint(Color("buttonColor"))
+                                    .interactive(),
+                                in: .circle
+                            )
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.trailing,20)
+                    .padding(.bottom,20)
+                }
+            }
+            
         }
     }
 }

@@ -60,23 +60,36 @@ class PlantsViewModel{
         hasStarted = true
         showSetReminder = true
     }
-    //تصنع نبتة وتضيفها وتقفل
-    // مهمة حفظ النبتة اللي يحددها المستخدم
+    // مهمة حفظ البيانات لما اليوزر يضغط صح
     func savePlant (){
-        let newPlant = Plant (name: plantName, room: room, wateringDays: wateringDays, light: light, water: water)
-        // هنا كأني اقول للصندوق اضف النبتة اللي اضافها المستخدم لنفسه
-        plants.append(newPlant)
+        //إذا فيه رقم تعديل ← نعدّل: ندوّر على النبتة ونحط فيها البيانات الجديدة من الحقول
+        if let editingPlantID {
+            let index = plants.firstIndex(where: {$0.id == editingPlantID})
+            if let index{
+                plants[index].name = plantName
+                plants[index].room = room
+                plants[index].wateringDays = wateringDays
+                plants[index].light = light
+                plants[index].water = water
+            }
+           // إذا ما فيه رقم تعديل (nil) ← نضيف: نصنع نبتة جديدة ونحطها في الصندوق
+        }else{
+            let newPlant = Plant(name: plantName, room: room, wateringDays: wateringDays, light: light, water: water)
+            plants.append(newPlant)
+            
+        }
         cancel()
-        
     }
     //ترجّع الحقول لأصلها
-    // هذي الدالة ترجع القيمة فاضية كل ما جا المستخدم يحط reinder جديد
+    // هذي الدالة ترجع القيمة فاضية كل ما جا المستخدم يحط reminder جديد
     func resetForm () {
         plantName = ""
         room = .bedroom
         wateringDays = .everyday
         light = .fullSun
         water = .ml20to50
+        editingPlantID = nil
+
     }
     
     // دالة سقي النبتة
@@ -91,5 +104,26 @@ class PlantsViewModel{
             // هنا تطبق الشرط اذا كانت قيمتها true ترجع false والعكس
             plants[index].isWatered.toggle()
         }
+    }
+    
+    // تفتح الشيت ببيانات النبتة وتسمح للمستخدم بالتعديل
+    func startEditing(plant: Plant){
+        editingPlantID = plant.id
+        // هنا على اليسار الحقول واليمين الاشياء اللي كتبها المستخدم قبل عشان لما يعذل ماتصير الحقول فاضية
+        plantName = plant.name
+        room = plant.room
+        wateringDays = plant.wateringDays
+        light = plant.light
+        water = plant.water
+        showSetReminder = true
+    }
+    
+    // دالة حذف النبتة اللي تطلع في شيت التعديل
+    func deletePlant() {
+        //هنا تقول اذا لقيتي رقم النبتة هذا خذيها وشيليها علطول عشان كذا ماحطينا انديكس
+        if let editingPlantID{
+            plants.removeAll(where: { $0.id == editingPlantID })
+        }
+        cancel()
     }
 }
