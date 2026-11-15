@@ -26,6 +26,7 @@
         { "path": "Noreminders.swift", "target-membership": [ "MyApp/compile-sources" ] },
         { "path": "PlantRow.swift", "target-membership": [ "MyApp/compile-sources" ] },
         { "path": "PlantslistView.swift", "target-membership": [ "MyApp/compile-sources" ] },
+        { "path": "Alldone.swift", "target-membership": [ "MyApp/compile-sources" ] },
       ],
     }, {
       "kind": "group",
