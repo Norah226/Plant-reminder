@@ -38,7 +38,7 @@ struct Setreminder: View {
                     } label: {
                         Label("Light", systemImage: "sun.max")
                             .foregroundStyle(.primary)
-
+                        
                     }
                 }
                 Section{
@@ -50,7 +50,7 @@ struct Setreminder: View {
                     }label: {
                         Label("Watering Days", systemImage: "drop")
                             .foregroundStyle(.primary)
-
+                        
                     }
                     Picker(selection:$viewModel.water){
                         ForEach(Water.allCases, id: \.self) {water in
@@ -59,8 +59,18 @@ struct Setreminder: View {
                     }label: {
                         Label("Water", systemImage: "drop")
                             .foregroundStyle(.primary)
-
                         
+                        
+                    }
+                    
+                }
+                // هنا نقول اذا فيه للنبته رقم تعديل اعرضي زر الحذف
+                if viewModel.editingPlantID != nil{
+                    Section{
+                        Button("Delete Reminder", role: .destructive){
+                            viewModel.deletePlant()
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                     
                 }

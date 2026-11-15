@@ -24,6 +24,7 @@
         { "path": "Startpage.swift", "target-membership": [ "MyApp/compile-sources" ] },
         { "path": "Setreminder.swift", "target-membership": [ "MyApp/compile-sources" ] },
         { "path": "Noreminders.swift", "target-membership": [ "MyApp/compile-sources" ] },
+        { "path": "PlantRow.swift", "target-membership": [ "MyApp/compile-sources" ] },
       ],
     }, {
       "kind": "group",
