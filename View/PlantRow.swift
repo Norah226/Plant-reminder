@@ -22,7 +22,7 @@ struct PlantRow: View {
             }label: {
                 if plant.isWatered{
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
+                        .foregroundColor(Color("checkColor"))
                 } else {
                     Image(systemName: "circle")
                         .foregroundColor(.secondary)
