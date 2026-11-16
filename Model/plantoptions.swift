@@ -21,6 +21,21 @@ enum WateringDays: String, CaseIterable{
     case onceaweek = "Once a week"
     case everytendays = "Every 10 days"
     case everytwoweeks = "Every 2 weeks"
+    
+    // هذي عشان تطابق اختيار النبتة وترجع لي القيمة حسب خيار عدد ايام السقي استخدمنا self لهذا الغرض
+    var days: Int{
+        switch self{
+        case .everyday: return 1
+        case .everytwodays: return 2
+        case .everythreedays: return 3
+        case .onceaweek: return 7
+        case .everytendays: return 10
+        case .everytwoweeks: return 14
+        }
+    }
+    
+    
+    
 }
 
 enum Light: String, CaseIterable{

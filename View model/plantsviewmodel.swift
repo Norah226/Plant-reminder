@@ -7,6 +7,8 @@
 
 import Foundation
 import Observation
+import UserNotifications
+
 @Observable
 class PlantsViewModel{
     // plants هنا البي سمول لانها خانة مب نوع
@@ -59,10 +61,11 @@ class PlantsViewModel{
     func start () {
         hasStarted = true
         showSetReminder = true
+        requestNotification()
     }
     // مهمة حفظ البيانات لما اليوزر يضغط صح
     func savePlant (){
-        //إذا فيه رقم تعديل ← نعدّل: ندوّر على النبتة ونحط فيها البيانات الجديدة من الحقول
+        // هنا لما اليوزر يبي يعدل طبعا الاندكس تمثل ترتيب النبتة في اي صف والid يمثل رقمها وهنا الدالة تقول دوري على الid هذا شوفي وين النبتة جالسة وعدلي بياناتها
         if let editingPlantID {
             let index = plants.firstIndex(where: {$0.id == editingPlantID})
             if let index{
@@ -71,12 +74,13 @@ class PlantsViewModel{
                 plants[index].wateringDays = wateringDays
                 plants[index].light = light
                 plants[index].water = water
+                scheduleNotification(plant: plants[index])
             }
             // إذا ما فيه رقم تعديل (nil) ← نضيف: نصنع نبتة جديدة ونحطها في الصندوق
         }else{
             let newPlant = Plant(name: plantName, room: room, wateringDays: wateringDays, light: light, water: water)
             plants.append(newPlant)
-            
+            scheduleNotification(plant: newPlant)
         }
         cancel()
     }
@@ -123,14 +127,51 @@ class PlantsViewModel{
         //هنا تقول اذا لقيتي رقم النبتة هذا خذيها وشيليها علطول عشان كذا ماحطينا انديكس
         if let editingPlantID{
             plants.removeAll(where: { $0.id == editingPlantID })
+            
+            cancelNotification(plantID: editingPlantID)
+
         }
         cancel()
     }
     
     // دالة الحذف باستخدام السحب تستقبل نوع النبتة اللي تسحبها المستخدمة
     func delete(plant: Plant){
-        // هنا شرط يقول هل النبتة تياو نفس الايدي حقها ؟ اذا اي احذفي
+        // هنا شرط يقول هل النبتة تساوي نفس الايدي حقها ؟ اذا اي احذفي
         plants.removeAll(where: { $0.id == plant.id})
-                         
+        
+        cancelNotification(plantID: plant.id)
+        
+    }
+    
+    // تطلب من اليوزر الاذن بالاشعارات
+    func requestNotification(){
+        // مركز الاشعارات
+        UNUserNotificationCenter.current()
+        // هنا معناها اطلبي الاذن وحطينا خيار يكون في صوت وتنبيه وبعدها التطبيق مايوسي شي اذا رد المستخدم
+            .requestAuthorization(options: [.alert, .sound]) { _, _ in}
+    }
+    
+    // جدولة الاشعار
+    func scheduleNotification(plant: Plant){
+        //هنا نجهز رسالة الاشعار
+        let content = UNMutableNotificationContent()
+        content.body = "Hey! let's water your plant"
+        content.sound = .default
+        // هنا تقول احسبي الايام بالساعات والثواني عشان تعرف تعكس قيمة اي نبتة اللي دخلها المستخدم؟ مثلا بوتس كل يوم تحسب وهكذا
+        let seconds = Double(plant.wateringDays.days * 24 * 60 * 60)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: true)
+        // هنا تحط الرسالة في ظرفف
+        let request = UNNotificationRequest(identifier: plant.id.uuidString, content: content, trigger: trigger)
+        //وخلاص اخر شي اضافة الاشعار
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    // دالة لو المستخدم حذف نبتة يحذف الاشعار معها
+    func cancelNotification(plantID: UUID){
+        
+        UNUserNotificationCenter.current()
+        
+            .removePendingNotificationRequests(withIdentifiers: [plantID.uuidString])
     }
 }
+
