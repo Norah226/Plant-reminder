@@ -22,28 +22,34 @@ struct PlantslistView: View {
                          total: Double(viewModel.plants.count))
                 .tint(Color("buttonColor"))
                 .padding(.horizontal,30)
-            
-            // المستخدم ينزل لتحت 
-            ScrollView {
-                VStack(spacing: 0) {
-                    // لكل نبتة في الصندوق: اعرضي صف
-                    ForEach(viewModel.plants) { plant in
+           
+            // قائمة جاهزة فيها صفوف مقسمة وقابلة للسحب 
+            List {
+                ForEach(viewModel.plants) { plant in
 
-                        PlantRow(plant: plant, viewModel: viewModel)
-                            .padding(.vertical, 12)
-                            // يخلي الصف كله قابل للضغط، حتى المساحة الفاضية
-                            .contentShape(Rectangle())
-                            // لما تضغط على النبتة: افتحي ورقة التعديل
-                            .onTapGesture {
-                                viewModel.startEditing(plant: plant)
+                    PlantRow(plant: plant, viewModel: viewModel)
+                        .padding(.vertical, 8)
+                        .contentShape(Rectangle())
+                        // ضغطة على النبتة: تفتح ورقة التعديل
+                        .onTapGesture {
+                            viewModel.startEditing(plant: plant)
+                        }
+                        // خلفية الصف شفافة، عشان تكون سوداء مثل الصفحة
+                        .listRowBackground(Color.clear)
+                        // السحب من اليمين: يطلع زر حذف أحمر
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                viewModel.delete(plant: plant)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
                             }
-
-                        // خط بين كل صف والثاني
-                        Divider()
-                    }
+                        }
                 }
-                .padding(.horizontal, 16)
             }
+            // شكل بسيط بدون صناديق رمادية
+            .listStyle(.plain)
+            // نشيل خلفية القائمة الافتراضية
+            .scrollContentBackground(.hidden)
             
             
             

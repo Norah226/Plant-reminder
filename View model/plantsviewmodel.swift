@@ -72,7 +72,7 @@ class PlantsViewModel{
                 plants[index].light = light
                 plants[index].water = water
             }
-           // إذا ما فيه رقم تعديل (nil) ← نضيف: نصنع نبتة جديدة ونحطها في الصندوق
+            // إذا ما فيه رقم تعديل (nil) ← نضيف: نصنع نبتة جديدة ونحطها في الصندوق
         }else{
             let newPlant = Plant(name: plantName, room: room, wateringDays: wateringDays, light: light, water: water)
             plants.append(newPlant)
@@ -89,7 +89,7 @@ class PlantsViewModel{
         light = .fullSun
         water = .ml20to50
         editingPlantID = nil
-
+        
     }
     
     // دالة سقي النبتة
@@ -125,5 +125,12 @@ class PlantsViewModel{
             plants.removeAll(where: { $0.id == editingPlantID })
         }
         cancel()
+    }
+    
+    // دالة الحذف باستخدام السحب تستقبل نوع النبتة اللي تسحبها المستخدمة
+    func delete(plant: Plant){
+        // هنا شرط يقول هل النبتة تياو نفس الايدي حقها ؟ اذا اي احذفي
+        plants.removeAll(where: { $0.id == plant.id})
+                         
     }
 }
