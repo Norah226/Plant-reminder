@@ -30,15 +30,32 @@ struct Startpage: View {
                     .padding(.leading,14)
                     .padding(.top,16)
                 
-                // هنا شرط وكتبته في هذي الصفحة عشانها هي اللي تنعرض للمستخدم اول مره
                 if viewModel.hasStarted{
-                    // مساحة من فوق
-                    Spacer()
-                    Noreminders()
-                    // يخلي النص يصير بالنص اللي في الصفحة الثانية عشان مايتحكم فيه الvstackالكبير 
-                        .frame(maxWidth:.infinity)
-                    // مساحة من تحت
-                    Spacer()
+                    // هنا شرط وكتبته في هذي الصفحة عشانها هي اللي تنعرض للمستخدم اول مره
+                    // اذا فاضي اعرض صفحة هذي
+                    if viewModel.plants.isEmpty{
+                        // مساحة من فوق
+                        Spacer()
+                        Noreminders()
+                        // يخلي النص يصير بالنص اللي في الصفحة الثانية عشان مايتحكم فيه الvstackالكبير
+                            .frame(maxWidth:.infinity)
+                        // مساحة من تحت
+                        Spacer()
+                        
+                        // واذا كانت كلها مسقية عرضي هذي الصفحة
+                        
+                    } else if viewModel.allWatered{
+                        Spacer()
+                        Alldone()
+                            .frame(maxWidth: .infinity)
+                        Spacer()
+                        
+                        
+                    }else {
+                        PlantslistView(viewModel: viewModel)
+                        
+                    }
+                    
                 }else {
                     
                     
