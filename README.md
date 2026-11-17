@@ -12,8 +12,6 @@ Planto is a reminder app that helps you remember to water your plants 😉
 * 🔔 Getting notifications based on watering days
 * 🎉 Celebrating with an "All Done" page when all plants are watered
 
-## Screenshots
-
 
 ## Technologies Used
 
